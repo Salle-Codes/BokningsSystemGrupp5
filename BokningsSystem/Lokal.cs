@@ -8,5 +8,6 @@ namespace BokningsSystem
 {
     internal class Lokal
     {
+
     }
 }
