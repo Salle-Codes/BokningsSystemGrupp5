@@ -18,6 +18,7 @@ namespace BokningsSystem
             
         }
 
+            //Patrik gör List, New och Delete-metoderna
         public static void List()
         {
             //Listar upp alla salar/grupprum med * om den är upptagen samt egenskaper på rummen
