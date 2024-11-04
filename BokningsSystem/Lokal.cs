@@ -25,7 +25,7 @@ namespace BokningsSystem
             FreeTimeStop = freetimeStop;
         }
 
-            //Patrik gör List, New och Delete-metoderna
+            //Patrik gör List, New och Delete-metoderna, Kolla med Ahmed gällande datetime för listan
         public static void List()
         {
             //Listar upp alla salar/grupprum med * om den är upptagen samt egenskaper på rummen
