@@ -11,6 +11,12 @@ namespace BokningsSystem
         public string Name { get; set; }
 
         public byte Seats { get; set; }
+        public byte Outlets { get; set; }
+        public bool Ac {  get; set; }
+        public Lokal()
+        {
+            
+        }
 
         public void List()
         {

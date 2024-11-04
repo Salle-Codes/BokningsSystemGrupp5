@@ -8,6 +8,9 @@ namespace BokningsSystem
 {
     internal interface IBookable
     {
-        
+        public void Booking();
+        public void CancelBooking();
+
+
     }
 }

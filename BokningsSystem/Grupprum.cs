@@ -8,6 +8,6 @@ namespace BokningsSystem
 {
     internal class Grupprum: Lokal
     {
-
+        public int Size { get; set; }
     }
 }

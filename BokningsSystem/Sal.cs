@@ -8,6 +8,6 @@ namespace BokningsSystem
 {
     internal class Sal: Lokal
     {
-
+        public bool Projector { get; set; }
     }
 }
