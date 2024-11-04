@@ -27,7 +27,7 @@ namespace BokningsSystem
         {
             foreach (Lokal l in premises)
             {
-                Console.WriteLine($"{l.Name} är bokad {l.FreeTimeStart} - {l.FreeTimeStop}");
+                Console.WriteLine($"{l.Name} har \n{l.Outlets}st eluttag och \n{l.Seats}platser.är bokad {l.FreeTimeStart} - {l.FreeTimeStop}");
             }
             //Listar upp alla salar/grupprum med * om den är upptagen samt egenskaper på rummen
         }

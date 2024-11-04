@@ -29,7 +29,6 @@
             premises.Add(new Lokal("Grupprum 3", 1, 254, true));
             Console.WriteLine("Välkommen till Plushögskolans bokninssystem för salar och grupprum!");
             Console.WriteLine("1: Visa bokningar \n2: Boka sal/grupprum\n3: Redigera bokning \n4: Avboka \n5: Lägg till sal/grupprum \n6: Ta bort sal/grupprum\n7: Avsluta");
-            Console.ReadLine();
             choice = Nullable(Console.ReadLine());
             switch (choice)
             {
