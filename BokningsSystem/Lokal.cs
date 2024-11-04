@@ -13,9 +13,16 @@ namespace BokningsSystem
         public byte Seats { get; set; }
         public byte Outlets { get; set; }
         public bool Ac {  get; set; }
-        public Lokal()
+        public DateTime FreeTimeStart { get; set; }
+        public DateTime FreeTimeStop { get; set; }
+        public Lokal(string name, byte seats, byte outlets, bool ac, DateTime freetimeStart, DateTime freetimeStop)
         {
-            
+            Name = name;
+            Seats = seats;
+            Outlets = outlets;
+            Ac = ac;
+            FreeTimeStart = freetimeStart;
+            FreeTimeStop = freetimeStop;
         }
 
             //Patrik gör List, New och Delete-metoderna
