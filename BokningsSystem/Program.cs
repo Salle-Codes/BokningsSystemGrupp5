@@ -27,6 +27,7 @@
             switch (choice)
             {
                 case "1":
+                    Lokal.List();
                     return;
                 case "2":
                     return;

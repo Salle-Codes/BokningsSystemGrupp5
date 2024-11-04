@@ -18,17 +18,17 @@ namespace BokningsSystem
             
         }
 
-        public void List()
+        public static void List()
         {
             //Listar upp alla salar/grupprum med * om den är upptagen samt egenskaper på rummen
         }
 
-        public void New ()
+        public static void New ()
         {
             //skapa nya salar/rum
         }
 
-        public void Delete()
+        public static void Delete()
         {
             //Ta bort sal/rum
         }
