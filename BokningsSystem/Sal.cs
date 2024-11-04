@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace BokningsSystem
 {
-    internal class Sal: Lokal
+    internal class Sal: Lokal, IBookable
     {
-        public Sal(string name, byte seats, byte outlets, bool ac, DateTime freetimeStart, DateTime freetimeStop) : base(name, seats, outlets, ac, freetimeStart, freetimeStop)
+        public Sal(string name, byte seats, byte outlets, bool ac) : base(name, seats, outlets, ac)
         {
-
         }
 
         public bool Projector { get; set; }
