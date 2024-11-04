@@ -47,6 +47,7 @@
                     return;
                 case "6":
                     Lokal.Delete(premises);
+                    Pause();
                     return;
                 case "Null":
                     Console.WriteLine("Något gick fel, vänligen försök igen");
