@@ -8,11 +8,11 @@ namespace BokningsSystem
 {
     internal class Grupprum: Lokal
     {
-        public Grupprum(string roomType, byte seats, byte outlets, bool ac, int roomNum) : base(roomType, seats, outlets, ac, roomNum)
+        public int Windows { get; set; }
+        public Grupprum(string roomType, byte seats, byte outlets, bool ac, int roomNum, int windows) : base(roomType, seats, outlets, ac, roomNum)
         {
+            Windows = windows;
         }
-
-        public int Size { get; set; }
 
     }
 }

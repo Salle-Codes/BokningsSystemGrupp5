@@ -8,9 +8,9 @@ namespace BokningsSystem
 {
     internal interface IBookable
     {
-        public static virtual void Booking()
+        public static virtual void Booking(Lokal lokal)
         {
-            Console.WriteLine("");
+
         }
         public virtual void CancelBooking()
         {

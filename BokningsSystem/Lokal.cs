@@ -28,9 +28,9 @@ namespace BokningsSystem
 
         public static void List(List<Lokal> premises)
         {
-            foreach (Lokal l in premises)
+            foreach (Lokal room in premises)
             {
-                Console.WriteLine($"{l.RoomType} har \n{l.Outlets}st eluttag och \n{l.Seats}st sittplatser \nBokningar:\n{l.FreeTimeStart} - {l.FreeTimeStop}");
+                Console.WriteLine($"{room.RoomType} har \n{room.Outlets}st eluttag och \n{room.Seats}st sittplatser \nBokningar:\n{room.FreeTimeStart} - {room.FreeTimeStop}");
             }
             //Listar upp alla salar/grupprum med * om den är upptagen samt egenskaper på rummen
         }
@@ -78,7 +78,7 @@ namespace BokningsSystem
                         }
                         if (int.TryParse(Console.ReadLine(), out int choice))
                         {
-                            int index = Program.premises.FindIndex(x => x.RoomNum == choice);
+                            Lokal index = Program.premises.FirstOrDefault(x => x.RoomNum == choice);
                         }
                         Program.Pause();
                         break;
