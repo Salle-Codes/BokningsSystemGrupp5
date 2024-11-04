@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BokningsSystem
 {
-    internal class Grupprum: Lokal, IBookable
+    internal class Grupprum: Lokal
     {
-        public Grupprum(string name, byte seats, byte outlets, bool ac) : base(name, seats, outlets, ac)
+        public Grupprum(string roomType, byte seats, byte outlets, bool ac, int roomNum) : base(roomType, seats, outlets, ac, roomNum)
         {
         }
 

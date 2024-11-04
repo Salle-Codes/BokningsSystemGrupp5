@@ -8,7 +8,7 @@ namespace BokningsSystem
 {
     internal class Sal: Lokal, IBookable
     {
-        public Sal(string name, byte seats, byte outlets, bool ac) : base(name, seats, outlets, ac)
+        public Sal(string roomType, byte seats, byte outlets, bool ac, int roomNum) : base(roomType, seats, outlets, ac, roomNum)
         {
         }
 
