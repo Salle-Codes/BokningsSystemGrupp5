@@ -37,18 +37,18 @@ namespace BokningsSystem
             //skapa nya salar/rum
         }
 
-        public static void Delete(List<Lokal> lokaler)
+        public static void Delete(List<Lokal> premises)
         {
             //Ta bort lokal
             Console.WriteLine("Vilken lokal vill du ta bort?");
             var lokalen = Console.ReadLine();
             //Leta efter matchande lokal i listan och tilldela den till en ny variabel
-            var lokalDelete = lokaler.FirstOrDefault(lok => lok.Name.Equals(lokalen, StringComparison.OrdinalIgnoreCase));
+            var lokalDelete = premises.FirstOrDefault(lok => lok.Name.Equals(lokalen, StringComparison.OrdinalIgnoreCase));
 
             if (lokalDelete != null)
             {
                 // Ta bort lokalen från listan
-                lokaler.Remove(lokalDelete);
+                premises.Remove(lokalDelete);
                 Console.WriteLine($"Lokal '{lokalen}' har tagits bort.");
             }
             else
