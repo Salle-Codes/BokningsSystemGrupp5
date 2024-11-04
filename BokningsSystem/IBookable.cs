@@ -8,7 +8,7 @@ namespace BokningsSystem
 {
     internal interface IBookable
     {
-        public void Booking();
+        public void Booking(DateTime freeTimeStart, DateTime freeTimeStop);
         public void CancelBooking();
 
 

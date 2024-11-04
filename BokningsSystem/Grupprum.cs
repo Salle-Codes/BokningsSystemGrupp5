@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace BokningsSystem
 {
-    internal class Grupprum: Lokal
+    internal class Grupprum: Lokal, IBookable
     {
-        public Grupprum(string name, byte seats, byte outlets, bool ac, DateTime freetimeStart, DateTime freetimeStop) : base(name, seats, outlets, ac, freetimeStart, freetimeStop)
+        public Grupprum(string name, byte seats, byte outlets, bool ac) : base(name, seats, outlets, ac)
         {
-
         }
 
         public int Size { get; set; }
