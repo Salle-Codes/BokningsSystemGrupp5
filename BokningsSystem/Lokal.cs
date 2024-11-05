@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BokningsSystem
 {
-    internal class Lokal: IBookable
+    internal class Lokal : IBookable
     {
         public string RoomType { get; set; }
         public int RoomNum { get; set; }
@@ -29,12 +30,61 @@ namespace BokningsSystem
 
         public static void List(List<Lokal> premises)
         {
-            foreach (Lokal room in premises)
+            Console.WriteLine("1: Lista alla lediga lokaler\n 2: Lista alla bokade lokaler\n");
+            var choice = (Console.ReadLine());
+
+            switch (choice)
             {
-                if (room.IsBooked == true)
-                {
-                    Console.WriteLine($"{room.RoomType} {room.RoomNum} {room.IsBooked} har \n{room.Outlets}st eluttag och \n{room.Seats}st sittplatser \nBokningar:\n{room.FreeTimeStart} - {room.FreeTimeStop}");
-                }
+                case "1":
+                    Console.WriteLine("1: Lista lokalerna med egenskaper\n 2: Lista lokaler utan egenskaper");
+                    var choice2 = (Console.ReadLine());
+                    switch (choice2)
+                    {
+                        case "1":
+                            foreach (Lokal room in premises)
+                            {
+                                if (room.IsBooked != true)
+                                {
+                                    Console.WriteLine($"{room.RoomType} {room.RoomNum} har \n{room.Outlets}st eluttag och \n{room.Seats}st sittplatser \nBokningar: Lokalen har inga aktiva bokningar");
+                                }
+                            }
+                            break;
+                        case "2":
+                            foreach (Lokal room in premises)
+                            {
+                                if (room.IsBooked != true)
+                                {
+                                    Console.WriteLine($"{room.RoomType} {room.RoomNum} Har inga aktiva bokningar");
+                                }
+                            }
+                            break;
+                    }
+                    break;
+                case "2":
+                    Console.WriteLine("1: Lista alla lokaler med egenskaper\n 2: Lista alla lokaler utan egenskaper");
+                    var choice3 = Console.ReadLine();
+                    switch (choice3)
+                    {
+                        case "1":
+                            foreach (Lokal room in premises)
+                            {
+                                if (room.IsBooked == true)
+                                {
+                                    Console.WriteLine($"{room.RoomType} {room.RoomNum} {room.IsBooked} har \n{room.Outlets}st eluttag och \n{room.Seats}st sittplatser \nBokningar:\n{room.FreeTimeStart} - {room.FreeTimeStop}");
+                                }
+                            }
+                            break;
+                        case "2":
+                            foreach (Lokal room in premises)
+                            {
+                                if (room.IsBooked == true)
+                                {
+                                    Console.WriteLine($"{room.RoomType} {room.RoomNum} \nBokningar:\n{room.FreeTimeStart} - {room.FreeTimeStop}");
+                                }
+                            }
+                            break;
+                    }
+                    break;
             }
             //Listar upp alla salar/grupprum med * om den är upptagen samt egenskaper på rummen
         }
@@ -77,7 +127,7 @@ namespace BokningsSystem
                 {
                     case 1:
                         Console.WriteLine("Vilken sal vill du boka? \nAnge rumnummret:");
-                        foreach(Lokal Type in Program.premises)
+                        foreach (Lokal Type in Program.premises)
                         {
                             if (Type.RoomType == "Sal" && !Type.IsBooked)
                             {
@@ -100,8 +150,8 @@ namespace BokningsSystem
                         }
                         Program.Pause();
                         break;
-                    case 2:  
-                        
+                    case 2:
+
                         break;
                     default:
                         Console.WriteLine("Något gick fel, vänligen försök igen");
