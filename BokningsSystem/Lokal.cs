@@ -16,7 +16,7 @@ namespace BokningsSystem
         public bool Ac { get; set; }
         public DateTime FreeTimeStart { get; set; }
         public TimeSpan FreeTimeStop { get; set; }
-        public bool IsBooked { get; set; } = false;
+        public bool IsBooked { get; set; }
         public Lokal(string roomType, byte seats, byte outlets, bool ac, int roomNum)
         {
             RoomType = roomType;
@@ -24,13 +24,17 @@ namespace BokningsSystem
             Outlets = outlets;
             Ac = ac;
             RoomNum = roomNum;
+            IsBooked = false;
         }
 
         public static void List(List<Lokal> premises)
         {
             foreach (Lokal room in premises)
             {
-                Console.WriteLine($"{room.RoomType} har \n{room.Outlets}st eluttag och \n{room.Seats}st sittplatser \nBokningar:\n{room.FreeTimeStart} - {room.FreeTimeStop}");
+                if (room.IsBooked == true)
+                {
+                    Console.WriteLine($"{room.RoomType} {room.RoomNum} {room.IsBooked} har \n{room.Outlets}st eluttag och \n{room.Seats}st sittplatser \nBokningar:\n{room.FreeTimeStart} - {room.FreeTimeStop}");
+                }
             }
             //Listar upp alla salar/grupprum med * om den är upptagen samt egenskaper på rummen
         }
@@ -43,10 +47,14 @@ namespace BokningsSystem
         public static void Delete(List<Lokal> premises)
         {
             //Ta bort lokal
-            Console.WriteLine("Vilken lokal vill du ta bort?");
-            var lokalen = Console.ReadLine();
+            Console.WriteLine("Vilken lokal vill du ta bort? Ange nummer:");
+            foreach (Lokal room in premises)
+            {
+                Console.WriteLine($"{room.RoomType} {room.RoomNum}");
+            }
+            int lokalen = Convert.ToInt32(Console.ReadLine());
             //Leta efter matchande lokal i listan och tilldela den till en ny variabel
-            var lokalDelete = premises.FirstOrDefault(lok => lok.RoomType.Equals(lokalen, StringComparison.OrdinalIgnoreCase));
+            var lokalDelete = premises.FirstOrDefault(lok => lok.RoomNum.Equals(lokalen));
 
             if (lokalDelete != null)
             {
@@ -62,7 +70,7 @@ namespace BokningsSystem
 
         public static void Booking()
         {
-            Console.WriteLine("Vad vill du boka:\n1: Sal\n2:Grupprum");
+            Console.WriteLine("Vad vill du boka:\n1: Sal\n2: Grupprum");
             if (int.TryParse(Console.ReadLine(), out int booking))
             {
                 switch (booking)
@@ -79,6 +87,16 @@ namespace BokningsSystem
                         if (int.TryParse(Console.ReadLine(), out int choice))
                         {
                             Lokal index = Program.premises.FirstOrDefault(x => x.RoomNum == choice);
+                            if (index != null)
+                            {
+                                Console.WriteLine("Vilken tid vill du boka? (yyyy-MM-dd HH:mm)");
+                                string tempString = Console.ReadLine();
+                                Sal.BokningSal(index, tempString);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Ingen sal hittades");
+                            }
                         }
                         Program.Pause();
                         break;

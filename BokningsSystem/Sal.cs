@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +14,14 @@ namespace BokningsSystem
         {
             Projector = projector;
         }
-
-        public void BokningSal(Lokal room)
+        public static void BokningSal(Lokal room, string time)
         {
+            DateTime myDate = DateTime.ParseExact(time, "yyyy-MM-dd HH:mm",
+            System.Globalization.CultureInfo.InvariantCulture);
             Program.premises.Add(new Sal (room.RoomType, room.Seats, room.Outlets, room.Ac, room.RoomNum, true));
+            room.IsBooked = true;
+            room.FreeTimeStart = myDate;
+
         }
     }
 }

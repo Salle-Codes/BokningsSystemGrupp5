@@ -61,6 +61,11 @@
                         Console.WriteLine("Något gick fel, vänligen försök igen");
                         Pause();
                         break;
+                    case "7":
+                        Console.WriteLine("Tack för att du använde vårt bokningssystem!");
+                        Pause();
+                        Environment.Exit(0);
+                        break;
                     default:
                         Pause();
                         break;
