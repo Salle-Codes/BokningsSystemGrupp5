@@ -58,6 +58,9 @@ namespace BokningsSystem
                                 }
                             }
                             break;
+                        default:
+                            Console.WriteLine("Ogiltig input");
+                            break;
                     }
                     break;
                 case "2":
@@ -83,7 +86,13 @@ namespace BokningsSystem
                                 }
                             }
                             break;
+                        default:
+                            Console.WriteLine("Ogiltig input");
+                            break;
                     }
+                    break;
+                default:
+                    Console.WriteLine("Ogiltig input");
                     break;
             }
             //Listar upp alla salar/grupprum med * om den är upptagen samt egenskaper på rummen
