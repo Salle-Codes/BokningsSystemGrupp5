@@ -17,6 +17,7 @@ namespace BokningsSystem
         public DateTime FreeTimeStart { get; set; }
         public TimeSpan FreeTimeStop { get; set; }
         public bool IsBooked { get; set; }
+        public int BookingId { get; set; }
         public Lokal(string roomType, byte seats, byte outlets, bool ac, int roomNum)
         {
             RoomType = roomType;
@@ -90,7 +91,7 @@ namespace BokningsSystem
                         }
                         if (int.TryParse(Console.ReadLine(), out int choice))
                         {
-                            Lokal index = Program.premises.FirstOrDefault(x => x.RoomNum == choice);
+                            Lokal index = (Lokal)Program.premises.FirstOrDefault(x => x.RoomNum == choice).MemberwiseClone();
                             if (index != null)
                             {
                                 Console.WriteLine("Vilken tid vill du boka? (yyyy-MM-dd HH:mm)");
@@ -117,14 +118,14 @@ namespace BokningsSystem
                         }
                         if (int.TryParse(Console.ReadLine(), out choice))
                         {
-                            Lokal index = Program.premises.FirstOrDefault(x => x.RoomNum == choice);
+                            Lokal index = (Lokal)Program.premises.FirstOrDefault(x => x.RoomNum == choice).MemberwiseClone();
                             if (index != null)
                             {
                                 Console.WriteLine("Vilken tid vill du boka? (yyyy-MM-dd HH:mm)");
                                 string tempString = Console.ReadLine();
                                 Console.WriteLine("Hur länge vill du boka salen? (HH:mm)");
                                 string tempAmount = Console.ReadLine();
-                                Sal.BokningSal(index, tempString, tempAmount);
+                                Grupprum.BokningGrupprum(index, tempString, tempAmount);
                             }
                             else
                             {
