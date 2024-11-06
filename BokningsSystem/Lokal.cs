@@ -26,14 +26,18 @@ namespace BokningsSystem
             RoomNum = roomNum;
             IsBooked = false;
         }
+        public Lokal()
+        {
+            
+        }
 
         public static void List(List<Lokal> premises)
         {
             foreach (Lokal room in premises)
             {
-                if (room.IsBooked == true)
+                //if (room.IsBooked == true)
                 {
-                    Console.WriteLine($"{room.RoomType} {room.RoomNum} {room.IsBooked} har \n{room.Outlets}st eluttag och \n{room.Seats}st sittplatser \nBokningar:\n{room.FreeTimeStart} - {room.FreeTimeStop}");
+                    Console.WriteLine($"{room.RoomType} {room.RoomNum} {room.IsBooked} har \n{room.Outlets}st eluttag och \n{room.Seats}st sittplatser \nBokningar:\n{room.FreeTimeStart} - {room.FreeTimeStart.Add(room.FreeTimeStop)}");
                 }
             }
             //Listar upp alla salar/grupprum med * om den är upptagen samt egenskaper på rummen
@@ -91,7 +95,9 @@ namespace BokningsSystem
                             {
                                 Console.WriteLine("Vilken tid vill du boka? (yyyy-MM-dd HH:mm)");
                                 string tempString = Console.ReadLine();
-                                Sal.BokningSal(index, tempString);
+                                Console.WriteLine("Hur länge vill du boka salen? (HH:mm)");
+                                string tempAmount = Console.ReadLine();
+                                Sal.BokningSal(index, tempString, tempAmount);
                             }
                             else
                             {
@@ -100,8 +106,32 @@ namespace BokningsSystem
                         }
                         Program.Pause();
                         break;
-                    case 2:  
-                        
+                    case 2:
+                        Console.WriteLine("Vilken sal vill du boka? \nAnge rumnummret:");
+                        foreach (Lokal Type in Program.premises)
+                        {
+                            if (Type.RoomType == "Sal" && !Type.IsBooked)
+                            {
+                                Console.WriteLine($"{Type.RoomType} {Type.RoomNum}");
+                            }
+                        }
+                        if (int.TryParse(Console.ReadLine(), out choice))
+                        {
+                            Lokal index = Program.premises.FirstOrDefault(x => x.RoomNum == choice);
+                            if (index != null)
+                            {
+                                Console.WriteLine("Vilken tid vill du boka? (yyyy-MM-dd HH:mm)");
+                                string tempString = Console.ReadLine();
+                                Console.WriteLine("Hur länge vill du boka salen? (HH:mm)");
+                                string tempAmount = Console.ReadLine();
+                                Sal.BokningSal(index, tempString, tempAmount);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Ingen sal hittades");
+                            }
+                        }
+                        Program.Pause();
                         break;
                     default:
                         Console.WriteLine("Något gick fel, vänligen försök igen");
