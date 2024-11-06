@@ -41,7 +41,57 @@ namespace BokningsSystem
 
         public static void New()
         {
-            //skapa nya salar/rum
+            {
+                Console.WriteLine("Vad vill du skapa?");
+                Console.WriteLine("1: Grupprum");
+                Console.WriteLine("2: Sal");
+
+                string? roomTypeChoice = Console.ReadLine();
+
+                if (roomTypeChoice == "1" || roomTypeChoice == "2")
+                {
+                    Console.WriteLine("Ange rumnummer:");
+                    int roomNum = Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine("Ange antal sittplatser:");
+                    byte seats = Convert.ToByte(Console.ReadLine());
+
+                    Console.WriteLine("Ange antal eluttag:");
+                    byte outlets = Convert.ToByte(Console.ReadLine());
+
+                    Console.WriteLine("Finns det AC? (ja/nej):");
+                    bool ac = Console.ReadLine()?.ToLower() == "ja";
+
+                    // Skapa ett nytt rum baserat på användarens val
+                    if (roomTypeChoice == "1")
+                    {
+                        Console.WriteLine("Ange antal fönster:");
+                        int windows = Convert.ToInt32(Console.ReadLine());
+
+                        // Skapa ett nytt grupprum
+                        var newRoom = new Grupprum("Grupprum", seats, outlets, ac, roomNum, windows);
+                        Program.premises.Add(newRoom);
+                        Console.WriteLine($"Grupprum {roomNum} har lagts till.");
+
+                    }
+                    else if (roomTypeChoice == "2")
+                    {
+                        Console.WriteLine("Finns det projektor? (ja/nej):");
+                        bool projector = Console.ReadLine()?.ToLower() == "ja";
+
+                        // Skapa en ny sal
+                        var newRoom = new Sal("Sal", seats, outlets, ac, roomNum, projector);
+                        Program.premises.Add(newRoom);
+                        Console.WriteLine($"Sal {roomNum} har lagts till.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Ogiltigt val. Försök igen.");
+                }
+
+                
+            }
         }
 
         public static void Delete(List<Lokal> premises)

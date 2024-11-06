@@ -3,7 +3,7 @@
     internal class Program
     {
         public static List <Lokal> premises = new List<Lokal>();
-        public static void Pause() // testar /Patrik
+        public static void Pause() 
         {
             Console.WriteLine("Tryck Enter för att gå vidare");
             Console.ReadLine();
