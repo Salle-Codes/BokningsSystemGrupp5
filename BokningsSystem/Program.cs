@@ -21,8 +21,6 @@
         public static string? choice;
         static void Main(string[] args)
         {
-            int Position;
-            
             //Testlokaler
             premises.Add(new Grupprum("Grupprum", 8, 4, true, 1, 2));
             premises.Add(new Grupprum("Grupprum", 80, 40, true, 2, 2));

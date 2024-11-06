@@ -107,10 +107,10 @@ namespace BokningsSystem
                         Program.Pause();
                         break;
                     case 2:
-                        Console.WriteLine("Vilken sal vill du boka? \nAnge rumnummret:");
+                        Console.WriteLine("Vilket grupprum vill du boka? \nAnge rumnummret:");
                         foreach (Lokal Type in Program.premises)
                         {
-                            if (Type.RoomType == "Sal" && !Type.IsBooked)
+                            if (Type.RoomType == "Grupprum" && !Type.IsBooked)
                             {
                                 Console.WriteLine($"{Type.RoomType} {Type.RoomNum}");
                             }
@@ -128,7 +128,7 @@ namespace BokningsSystem
                             }
                             else
                             {
-                                Console.WriteLine("Ingen sal hittades");
+                                Console.WriteLine("Inget grupprum hittades");
                             }
                         }
                         Program.Pause();
