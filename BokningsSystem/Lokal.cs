@@ -35,13 +35,13 @@ namespace BokningsSystem
 
         public static void List(List<Lokal> premises)
         {
-            Console.WriteLine("1: Lista alla lediga lokaler\n 2: Lista alla bokade lokaler\n");
+            Console.WriteLine("1: Lista alla lediga lokaler\n2: Lista alla bokade lokaler\n");
             var choice = (Console.ReadLine());
 
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("1: Lista lokalerna med egenskaper\n 2: Lista lokaler utan egenskaper");
+                    Console.WriteLine("1: Lista lokalerna med egenskaper\n2: Lista lokaler utan egenskaper");
                     var choice2 = (Console.ReadLine());
                     switch (choice2)
                     {
@@ -69,7 +69,7 @@ namespace BokningsSystem
                     }
                     break;
                 case "2":
-                    Console.WriteLine("1: Lista alla lokaler med egenskaper\n 2: Lista alla lokaler utan egenskaper");
+                    Console.WriteLine("1: Lista alla lokaler med egenskaper\n2: Lista alla lokaler utan egenskaper");
                     var choice3 = Console.ReadLine();
                     switch (choice3)
                     {
