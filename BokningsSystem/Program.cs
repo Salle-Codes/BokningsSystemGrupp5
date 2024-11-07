@@ -1,4 +1,10 @@
-﻿namespace BokningsSystem
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Text.Json;
+namespace BokningsSystem
 {
     internal class Program
     {
@@ -18,21 +24,21 @@
             }
             return null;
         }
+        public static void WriteList(List<Lokal> list)
+        {
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string jsonString = JsonSerializer.Serialize(list, options);
+            File.WriteAllText("Bokningar.Json", jsonString);
+        }
         public static string? choice;
         static void Main(string[] args)
-        {
-            //Testlokaler
-            premises.Add(new Grupprum("Grupprum", 8, 4, true, 1, 2));
-            premises.Add(new Grupprum("Grupprum", 80, 40, true, 2, 2));
-            premises.Add(new Grupprum("Grupprum", 1, 254, true, 3, 2));
-            premises.Add(new Sal("Sal", 8, 4, true, 4, false));
-            premises.Add(new Sal("Sal", 80, 4, true, 5, true));
-            premises.Add(new Sal("Sal", 1, 25, true, 6, true));
-            
+        {            
+            premises.Clear();
+            premises = JsonSerializer.Deserialize<List<Lokal>>(File.ReadAllText("Bokningar.Json"));
             while (true)
             {
                 Console.WriteLine("Välkommen till Plushögskolans bokninssystem för salar och grupprum!");
-                Console.WriteLine("1: Visa bokningar \n2: Boka sal/grupprum\n3: Redigera bokning \n4: Avboka \n5: Lägg till sal/grupprum \n6: Ta bort sal/grupprum\n7: Avsluta");
+                Console.WriteLine("1: Visa bokningar \n2: Boka sal/grupprum\n3: Redigera bokning \n4: Avboka\n5: Lägg till sal/grupprum \n6: Ta bort sal/grupprum\n7: Avsluta");
                 choice = Nullable(Console.ReadLine());
 
                 switch (choice)
@@ -62,6 +68,7 @@
                     case "7":
                         Console.WriteLine("Tack för att du använde vårt bokningssystem!");
                         Pause();
+                        WriteList(premises);
                         Environment.Exit(0);
                         break;
                     default:

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BokningsSystem
 {
@@ -28,8 +29,7 @@ namespace BokningsSystem
         }
         public static void BokningGrupprum(Lokal room, string timeStart, string timeStop)
         {
-            Random rand = new Random();
-            int Id = rand.Next(1000, 9999);
+            int Id = IdCheck();
             DateTime myDate = DateTime.ParseExact(timeStart, "yyyy-MM-dd HH:mm",
             System.Globalization.CultureInfo.InvariantCulture);
             TimeSpan myDateStop = TimeSpan.Parse(timeStop);
@@ -39,6 +39,24 @@ namespace BokningsSystem
             room.BookingId = Id;
             Program.premises.Add(room);
             //Program.premises.Add(new Grupprum(room.RoomType, room.Seats, room.Outlets, room.Ac, room.RoomNum, 2, myDate, myDateStop, Id));
+        }
+        public static int IdCheck()
+        {
+            Random rand = new Random();
+            int Id = rand.Next(1000, 9999);
+            foreach (Lokal list in Program.premises)
+            {
+                if (list.BookingId == Id)
+                {
+                    IdCheck();
+                    return 0;
+                }
+                else
+                {
+                    return Id;
+                }
+            }
+            return 0;
         }
     }
 }
