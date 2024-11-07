@@ -18,6 +18,7 @@ namespace BokningsSystem
         public DateTime FreeTimeStart { get; set; }
         public TimeSpan FreeTimeStop { get; set; }
         public bool IsBooked { get; set; }
+        public int BookingId { get; set; }
         public Lokal(string roomType, byte seats, byte outlets, bool ac, int roomNum)
         {
             RoomType = roomType;
@@ -26,6 +27,10 @@ namespace BokningsSystem
             Ac = ac;
             RoomNum = roomNum;
             IsBooked = false;
+        }
+        public Lokal()
+        {
+            
         }
 
         public static void List(List<Lokal> premises)
@@ -145,12 +150,14 @@ namespace BokningsSystem
                         }
                         if (int.TryParse(Console.ReadLine(), out int choice))
                         {
-                            Lokal index = Program.premises.FirstOrDefault(x => x.RoomNum == choice);
+                            Lokal index = (Lokal)Program.premises.FirstOrDefault(x => x.RoomNum == choice).MemberwiseClone();
                             if (index != null)
                             {
                                 Console.WriteLine("Vilken tid vill du boka? (yyyy-MM-dd HH:mm)");
                                 string tempString = Console.ReadLine();
-                                Sal.BokningSal(index, tempString);
+                                Console.WriteLine("Hur länge vill du boka salen? (HH:mm)");
+                                string tempAmount = Console.ReadLine();
+                                Sal.BokningSal(index, tempString, tempAmount);
                             }
                             else
                             {
@@ -160,7 +167,31 @@ namespace BokningsSystem
                         Program.Pause();
                         break;
                     case 2:
-
+                        Console.WriteLine("Vilket grupprum vill du boka? \nAnge rumnummret:");
+                        foreach (Lokal Type in Program.premises)
+                        {
+                            if (Type.RoomType == "Grupprum" && !Type.IsBooked)
+                            {
+                                Console.WriteLine($"{Type.RoomType} {Type.RoomNum}");
+                            }
+                        }
+                        if (int.TryParse(Console.ReadLine(), out choice))
+                        {
+                            Lokal index = (Lokal)Program.premises.FirstOrDefault(x => x.RoomNum == choice).MemberwiseClone();
+                            if (index != null)
+                            {
+                                Console.WriteLine("Vilken tid vill du boka? (yyyy-MM-dd HH:mm)");
+                                string tempString = Console.ReadLine();
+                                Console.WriteLine("Hur länge vill du boka salen? (HH:mm)");
+                                string tempAmount = Console.ReadLine();
+                                Grupprum.BokningGrupprum(index, tempString, tempAmount);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Inget grupprum hittades");
+                            }
+                        }
+                        Program.Pause();
                         break;
                     default:
                         Console.WriteLine("Något gick fel, vänligen försök igen");

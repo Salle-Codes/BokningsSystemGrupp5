@@ -14,14 +14,32 @@ namespace BokningsSystem
         {
             Projector = projector;
         }
-        public static void BokningSal(Lokal room, string time)
+        public Sal(string roomType, byte seats, byte outlets, bool ac, int roomNum, bool projector, DateTime freeTimeStart, TimeSpan freeTimeStop, int bookingId)
         {
-            DateTime myDate = DateTime.ParseExact(time, "yyyy-MM-dd HH:mm",
+            RoomType = roomType;
+            Seats = seats;
+            Outlets = outlets;
+            Ac = ac;
+            RoomNum = roomNum;
+            IsBooked = true;
+            FreeTimeStart = freeTimeStart;
+            FreeTimeStop = freeTimeStop;
+            Projector = projector;
+            BookingId = bookingId;
+        }
+        public static void BokningSal(Lokal room, string timeStart, string timeStop)
+        {
+            Random rand = new Random();
+            DateTime myDate = DateTime.ParseExact(timeStart, "yyyy-MM-dd HH:mm",
             System.Globalization.CultureInfo.InvariantCulture);
-            Program.premises.Add(new Sal (room.RoomType, room.Seats, room.Outlets, room.Ac, room.RoomNum, true));
-            room.IsBooked = true;
+            TimeSpan myDateStop = TimeSpan.Parse(timeStop);
+            int Id = rand.Next(1000, 9999); 
             room.FreeTimeStart = myDate;
-
+            room.FreeTimeStop = myDateStop;
+            room.BookingId = Id;
+            room.IsBooked = true;
+            Program.premises.Add(room);
+            //Program.premises.Add(new Sal (room.RoomType, room.Seats, room.Outlets, room.Ac, room.RoomNum, true, myDate, myDateStop, Id));
         }
     }
 }
