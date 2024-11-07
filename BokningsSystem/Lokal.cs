@@ -153,11 +153,8 @@ namespace BokningsSystem
                             Lokal index = (Lokal)Program.premises.FirstOrDefault(x => x.RoomNum == choice).MemberwiseClone();
                             if (index != null)
                             {
-                                Console.WriteLine("Vilken tid vill du boka? (yyyy-MM-dd HH:mm)");
-                                string tempString = Console.ReadLine();
-                                Console.WriteLine("Hur länge vill du boka salen? (HH:mm)");
-                                string tempAmount = Console.ReadLine();
-                                Sal.BokningSal(index, tempString, tempAmount);
+                                
+                                Sal.BokningSal(index);
                             }
                             else
                             {
@@ -180,11 +177,7 @@ namespace BokningsSystem
                             Lokal index = (Lokal)Program.premises.FirstOrDefault(x => x.RoomNum == choice).MemberwiseClone();
                             if (index != null)
                             {
-                                Console.WriteLine("Vilken tid vill du boka? (yyyy-MM-dd HH:mm)");
-                                string tempString = Console.ReadLine();
-                                Console.WriteLine("Hur länge vill du boka salen? (HH:mm)");
-                                string tempAmount = Console.ReadLine();
-                                Grupprum.BokningGrupprum(index, tempString, tempAmount);
+                                Grupprum.BokningGrupprum(index);
                             }
                             else
                             {

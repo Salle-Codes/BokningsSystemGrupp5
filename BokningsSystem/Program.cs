@@ -33,7 +33,6 @@ namespace BokningsSystem
         public static string? choice;
         static void Main(string[] args)
         {            
-            premises.Clear();
             premises = JsonSerializer.Deserialize<List<Lokal>>(File.ReadAllText("Bokningar.Json"));
             while (true)
             {

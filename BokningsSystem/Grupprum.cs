@@ -27,36 +27,45 @@ namespace BokningsSystem
             BookingId = id;
             IsBooked = true;
         }
-        public static void BokningGrupprum(Lokal room, string timeStart, string timeStop)
+        public static void BokningGrupprum(Lokal room)
         {
-            int Id = IdCheck();
+            Console.WriteLine("Vilken tid vill du boka? (yyyy-MM-dd HH:mm)");
+            string timeStart = Console.ReadLine();
+            Console.WriteLine("Hur länge vill du boka grupprummet? (HH:mm)");
+            string timeStop = Console.ReadLine();
             DateTime myDate = DateTime.ParseExact(timeStart, "yyyy-MM-dd HH:mm",
             System.Globalization.CultureInfo.InvariantCulture);
             TimeSpan myDateStop = TimeSpan.Parse(timeStop);
-            room.FreeTimeStart = myDate;
-            room.FreeTimeStop = myDateStop;
-            room.IsBooked = true;
-            room.BookingId = Id;
-            Program.premises.Add(room);
-            //Program.premises.Add(new Grupprum(room.RoomType, room.Seats, room.Outlets, room.Ac, room.RoomNum, 2, myDate, myDateStop, Id));
+            var Book = Program.premises.FirstOrDefault(lok => lok.FreeTimeStart.Equals(myDate));
+            if (Book == null)
+            {
+                int Id = IdCheck(room);
+                room.FreeTimeStart = myDate;
+                room.FreeTimeStop = myDateStop;
+                room.IsBooked = true;
+                room.BookingId = Id;
+                Program.premises.Add(room);
+            }
+            else
+            {
+                Console.WriteLine("FEL FEL FEL");
+            }
         }
-        public static int IdCheck()
+        public static int IdCheck(Lokal room)
         {
             Random rand = new Random();
             int Id = rand.Next(1000, 9999);
-            foreach (Lokal list in Program.premises)
-            {
-                if (list.BookingId == Id)
+            var Book = Program.premises.FirstOrDefault(lok => lok.BookingId.Equals(Id));
+                if (Book != null)
                 {
-                    IdCheck();
+                    IdCheck(room);
                     return 0;
                 }
                 else
                 {
+                    Console.WriteLine($"Din bokning är nu genomförd, ditt boknings-ID är {Id}. Vänligen skriv ned detta då det behövs vid avbokning och redigering");
                     return Id;
                 }
-            }
-            return 0;
         }
     }
 }
