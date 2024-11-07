@@ -204,9 +204,23 @@ namespace BokningsSystem
             }
         }
 
-        public void CancelBooking()
+        public void CancelBooking(List<Lokal>premises)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Vad är ditt boknings-ID?");
+            int avbokningsId = Convert.ToInt32(Console.ReadLine());
+            //Leta efter matchande bokning i listan och tilldela den till en ny variabel
+            var bokningDelete = premises.FirstOrDefault(a => a.BookingId.Equals(avbokningsId));
+
+            if (bokningDelete != null)
+            {
+                //Ta bort bokningen från listan
+                premises.Remove(bokningDelete);
+                Console.WriteLine($"Bokningen med ID: {avbokningsId} har tagits bort.");
+            }
+            else
+            {
+                Console.WriteLine($"En bokning med ID: {avbokningsId} hittades inte.");
+            }
         }
     }
 }
