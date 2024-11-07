@@ -87,7 +87,7 @@ namespace BokningsSystem
                             {
                                 if (room.IsBooked == true)
                                 {
-                                    Console.WriteLine($"{room.RoomType} {room.RoomNum} \nBokningar:\n{room.FreeTimeStart} - {room.FreeTimeStop}");
+                                    Console.WriteLine($"{room.RoomType} {room.RoomNum} \nBokningar:\n{room.FreeTimeStart} - {room.FreeTimeStart.Add(room.FreeTimeStop)}");
                                 }
                             }
                             break;
