@@ -34,7 +34,7 @@ namespace BokningsSystem
             String bottomRight = "╝";
             String horizontal = "═";
             String vertical = "║";
-
+            Console.WriteLine("hej");
             Console.Clear();
             Console.Write(topLeft);
             for (int i = 0; i < 30; i++)
