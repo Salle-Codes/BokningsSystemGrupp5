@@ -49,7 +49,7 @@ namespace BokningsSystem
             }
             else
             {
-                Console.WriteLine("FEL FEL FEL");
+                Console.WriteLine("Något gick fel, vänligen försök igen");
                 Program.Pause();
             }
 
