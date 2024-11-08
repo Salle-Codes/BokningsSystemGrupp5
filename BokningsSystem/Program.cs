@@ -18,6 +18,46 @@
             }
             return null;
         }
+        public static void PrintMenu(String[] menuItems)
+        {
+            String topLeft = "╔";
+            String topRight = "╗";
+            String middleLeft = "╠";
+            String middleRight = "╣";
+            String bottomLeft = "╚";
+            String bottomRight = "╝";
+            String horizontal = "═";
+            String vertical = "║";
+
+            Console.Clear();
+            Console.Write(topLeft);
+            for (int i = 0; i < 30; i++)
+            {
+                Console.Write(horizontal);
+            }
+            Console.WriteLine(topRight);
+            Console.WriteLine(vertical + " ".PadRight(11) + " Meny".PadRight(19) + vertical);
+            Console.Write(middleLeft);
+            for (int i = 0; i < 30; i++)
+            {
+                Console.Write(horizontal);
+            }
+            Console.WriteLine(middleRight);
+
+
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                Console.WriteLine(vertical + $"{i + 1}: {menuItems[i]}".PadRight(30) + vertical);
+            }
+            Console.WriteLine(vertical + $"7: Avsluta".PadRight(30) + vertical);
+
+            Console.Write(bottomLeft);
+            for (int i = 0; i < 30; i++)
+            {
+                Console.Write(horizontal);
+            }
+            Console.WriteLine(bottomRight);
+        }
         public static string? choice;
         static void Main(string[] args)
         {
@@ -33,6 +73,7 @@
             {
                 Console.WriteLine("Välkommen till Plushögskolans bokninssystem för salar och grupprum!");
                 Console.WriteLine("1: Visa bokningar \n2: Boka sal/grupprum\n3: Redigera bokning \n4: Avboka \n5: Lägg till sal/grupprum \n6: Ta bort sal/grupprum\n7: Avsluta");
+                PrintMenu(new string[] { "Visa bokningar", "Boka sal/grupprum", "Redigera bokning", "Avboka", "Lägg till sal/grupprum", "Ta bort sal/grupprum" });
                 choice = Nullable(Console.ReadLine());
 
                 switch (choice)
