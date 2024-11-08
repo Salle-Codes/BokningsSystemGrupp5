@@ -177,7 +177,7 @@ namespace BokningsSystem
                             Lokal index = (Lokal)Program.premises.FirstOrDefault(x => x.RoomNum == choice).MemberwiseClone();
                             if (index != null)
                             {
-                                Grupprum.BokningGrupprum(index);
+                                Grupprum.BokningGrupprum(index); //Hej test2
                             }
                             else
                             {
