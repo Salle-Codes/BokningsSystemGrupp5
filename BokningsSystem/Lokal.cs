@@ -153,8 +153,11 @@ namespace BokningsSystem
                             Lokal index = (Lokal)Program.premises.FirstOrDefault(x => x.RoomNum == choice).MemberwiseClone();
                             if (index != null)
                             {
-                                
-                                Sal.BokningSal(index);
+                                Console.WriteLine("Vilken tid vill du boka? (yyyy-MM-dd HH:mm)");
+                                string tempString = Console.ReadLine();
+                                Console.WriteLine("Hur länge vill du boka salen? (HH:mm)");
+                                string tempAmount = Console.ReadLine();
+                                Sal.BokningSal(index, tempString, tempAmount);
                             }
                             else
                             {
@@ -177,7 +180,11 @@ namespace BokningsSystem
                             Lokal index = (Lokal)Program.premises.FirstOrDefault(x => x.RoomNum == choice).MemberwiseClone();
                             if (index != null)
                             {
-                                Grupprum.BokningGrupprum(index);
+                                Console.WriteLine("Vilken tid vill du boka? (yyyy-MM-dd HH:mm)");
+                                string tempString = Console.ReadLine();
+                                Console.WriteLine("Hur länge vill du boka salen? (HH:mm)");
+                                string tempAmount = Console.ReadLine();
+                                Grupprum.BokningGrupprum(index, tempString, tempAmount);
                             }
                             else
                             {
@@ -197,7 +204,7 @@ namespace BokningsSystem
             }
         }
 
-        public void CancelBooking(List<Lokal>premises)
+        public void CancelBooking(List<Lokal> premises)
         {
             Console.WriteLine("Vad är ditt boknings-ID?");
             int avbokningsId = Convert.ToInt32(Console.ReadLine());
@@ -215,5 +222,7 @@ namespace BokningsSystem
                 Console.WriteLine($"En bokning med ID: {avbokningsId} hittades inte.");
             }
         }
+
     }
 }
+
