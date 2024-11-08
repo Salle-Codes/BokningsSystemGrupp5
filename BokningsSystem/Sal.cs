@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BokningsSystem
 {
@@ -27,19 +28,48 @@ namespace BokningsSystem
             Projector = projector;
             BookingId = bookingId;
         }
-        public static void BokningSal(Lokal room, string timeStart, string timeStop)
+        public static void BokningSal(Lokal room)
         {
-            Random rand = new Random();
+            Console.WriteLine("Vilken tid vill du boka? (yyyy-MM-dd HH:mm)");
+            string timeStart = Console.ReadLine();
+            Console.WriteLine("Hur länge vill du boka salen? (HH:mm)");
+            string timeStop = Console.ReadLine();
             DateTime myDate = DateTime.ParseExact(timeStart, "yyyy-MM-dd HH:mm",
             System.Globalization.CultureInfo.InvariantCulture);
             TimeSpan myDateStop = TimeSpan.Parse(timeStop);
-            int Id = rand.Next(1000, 9999); 
-            room.FreeTimeStart = myDate;
-            room.FreeTimeStop = myDateStop;
-            room.BookingId = Id;
-            room.IsBooked = true;
-            Program.premises.Add(room);
-            //Program.premises.Add(new Sal (room.RoomType, room.Seats, room.Outlets, room.Ac, room.RoomNum, true, myDate, myDateStop, Id));
+            var Book = Program.premises.FirstOrDefault(lok => lok.FreeTimeStart.Equals(myDate));
+            if (Book == null)
+            {
+                int Id = IdCheck(room);
+                room.FreeTimeStart = myDate;
+                room.FreeTimeStop = myDateStop;
+                room.IsBooked = true;
+                room.BookingId = Id;
+                Program.premises.Add(room);
+            }
+            else
+            {
+                Console.WriteLine("Något gick fel, vänligen försök igen");
+                Program.Pause();
+            }
+
+
+        }
+        public static int IdCheck(Lokal room)
+        {
+            Random rand = new Random();
+            int Id = rand.Next(1000, 9999);
+            var Book = Program.premises.FirstOrDefault(lok => lok.BookingId.Equals(Id));
+            if (Book != null)
+            {
+                IdCheck(room);
+                return 0;
+            }
+            else
+            {
+                Console.WriteLine($"Din bokning är nu genomförd, ditt boknings-ID är {Id}. Vänligen skriv ned detta då det behövs vid avbokning och redigering");
+                return Id;
+            }
         }
     }
 }
