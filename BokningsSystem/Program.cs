@@ -91,8 +91,10 @@ namespace BokningsSystem
                         Lokal.Booking();
                         break;
                     case "3":
+                        Lokal.ChangeBooking();
                         break;
                     case "4":
+                        Lokal.CancelBooking(premises);
                         break;
                     case "5":
                         Lokal.New();

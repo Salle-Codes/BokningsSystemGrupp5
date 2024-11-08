@@ -197,7 +197,7 @@ namespace BokningsSystem
             }
         }
 
-        public void CancelBooking(List<Lokal> premises)
+        public static void CancelBooking(List<Lokal> premises)
         {
             Console.WriteLine("Vad är ditt boknings-ID?");
             int avbokningsId = Convert.ToInt32(Console.ReadLine());
@@ -215,7 +215,62 @@ namespace BokningsSystem
                 Console.WriteLine($"En bokning med ID: {avbokningsId} hittades inte.");
             }
         }
+        public static void ChangeBooking()
+        {
+            Console.WriteLine("Ange ditt ID för att ändra boknigen");
+            int bookingId = Convert.ToInt32(Console.ReadLine());
+            Lokal bookedRum = Program.premises.FirstOrDefault(x => x.BookingId == bookingId && x.IsBooked);
+            if (bookedRum != null)
+            {
+                Console.WriteLine("Vill du : \n 1. Ändra tid \n 2. Ändra datum");
+                if (int.TryParse(Console.ReadLine(), out int changingChoise))
+                {
+                    switch (changingChoise)
+                    {
+                        case 1:
 
+                            // Ändra endast antal timmar
+                            Console.WriteLine("Ange ny varaktighet för bokningen i timmar (HH:mm):");
+                            string newTempAmount = Console.ReadLine();
+
+                            if (TimeSpan.TryParse(newTempAmount, out TimeSpan newFreeTimeStop))
+                            {
+                                bookedRum.FreeTimeStop = newFreeTimeStop;
+                                Console.WriteLine($"Bokningen har uppdaterats. Din bokning har {newFreeTimeStop} Timmar nu.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Ogiltigt tidformat. Vänligen ange tid i HH:mm-format.");
+                            }
+                            break;
+                        case 2:
+
+                            Console.WriteLine("Ange ny starttid för bokningen (yyyy-MM-dd HH:mm):");
+                            string newStartTime = Console.ReadLine();
+                            Console.WriteLine("Ange ny varaktighet i timmar (HH:mm):");
+                            string newTempAmount2 = Console.ReadLine();
+
+                            if (DateTime.TryParse(newStartTime, out DateTime newFreeTimeStart) && TimeSpan.TryParse(newTempAmount2, out TimeSpan newFreeTimeStop2))
+                            {
+                                bookedRum.FreeTimeStart = newFreeTimeStart;
+                                bookedRum.FreeTimeStop = newFreeTimeStop2;
+                                Console.WriteLine($"Bokningen har uppdaterats till starttid {newFreeTimeStart} i {newFreeTimeStop2} timmar.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Ogiltigt datum eller tidformat. Vänligen försök igen.");
+                            }
+                            break;
+
+                        default:
+                            Console.WriteLine("Ogiltigt val. Vänligen välj ett korrekt alternativ.");
+                            break;
+                    }
+                }
+
+            }
+        }
     }
 }
+
 
