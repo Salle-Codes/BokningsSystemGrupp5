@@ -30,7 +30,7 @@ namespace BokningsSystem
         }
         public Lokal()
         {
-            
+
         }
 
         public static void List(List<Lokal> premises)
@@ -213,7 +213,7 @@ namespace BokningsSystem
                             Lokal index = (Lokal)Program.premises.FirstOrDefault(x => x.RoomNum == choice).MemberwiseClone();
                             if (index != null)
                             {
-                                
+
                                 Sal.BokningSal(index);
                             }
                             else
@@ -279,57 +279,65 @@ namespace BokningsSystem
         public static void ChangeBooking()
         {
             Console.WriteLine("Ange ditt ID för att ändra boknigen");
-            int bookingId = Convert.ToInt32(Console.ReadLine());
-            Lokal bookedRum = Program.premises.FirstOrDefault(x => x.BookingId == bookingId && x.IsBooked);
-            if (bookedRum != null)
+            if (int.TryParse(Console.ReadLine(), out int bookingId))
             {
-                Console.WriteLine("Vill du : \n 1. Ändra tid \n 2. Ändra datum");
-                if (int.TryParse(Console.ReadLine(), out int changingChoise))
+                Lokal bookedRum = Program.premises.FirstOrDefault(x => x.BookingId == bookingId && x.IsBooked);
+                if (bookedRum != null)
                 {
-                    switch (changingChoise)
+                    Console.WriteLine("Vill du : \n 1. Ändra tid \n 2. Ändra datum");
+                    if (int.TryParse(Console.ReadLine(), out int changingChoise))
                     {
-                        case 1:
+                        switch (changingChoise)
+                        {
+                            case 1:
 
-                            // Ändra endast antal timmar
-                            Console.WriteLine("Ange ny varaktighet för bokningen i timmar (HH:mm):");
-                            string newTempAmount = Console.ReadLine();
+                                // Ändra endast antal timmar
+                                Console.WriteLine("Ange ny varaktighet för bokningen i timmar (HH:mm):");
+                                string newTempAmount = Console.ReadLine();
 
-                            if (TimeSpan.TryParse(newTempAmount, out TimeSpan newFreeTimeStop))
-                            {
-                                bookedRum.FreeTimeStop = newFreeTimeStop;
-                                Console.WriteLine($"Bokningen har uppdaterats. Din bokning har {newFreeTimeStop} Timmar nu.");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Ogiltigt tidformat. Vänligen ange tid i HH:mm-format.");
-                            }
-                            break;
-                        case 2:
+                                if (TimeSpan.TryParse(newTempAmount, out TimeSpan newFreeTimeStop))
+                                {
+                                    bookedRum.FreeTimeStop = newFreeTimeStop;
+                                    Console.WriteLine($"Bokningen har uppdaterats. Din bokning har {newFreeTimeStop} Timmar nu.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Ogiltigt tidformat. Vänligen ange tid i HH:mm-format.");
+                                }
+                                break;
+                            case 2:
 
-                            Console.WriteLine("Ange ny starttid för bokningen (yyyy-MM-dd HH:mm):");
-                            string newStartTime = Console.ReadLine();
-                            Console.WriteLine("Ange ny varaktighet i timmar (HH:mm):");
-                            string newTempAmount2 = Console.ReadLine();
+                                Console.WriteLine("Ange ny starttid för bokningen (yyyy-MM-dd HH:mm):");
+                                string newStartTime = Console.ReadLine();
+                                Console.WriteLine("Ange ny varaktighet i timmar (HH:mm):");
+                                string newTempAmount2 = Console.ReadLine();
 
-                            if (DateTime.TryParse(newStartTime, out DateTime newFreeTimeStart) && TimeSpan.TryParse(newTempAmount2, out TimeSpan newFreeTimeStop2))
-                            {
-                                bookedRum.FreeTimeStart = newFreeTimeStart;
-                                bookedRum.FreeTimeStop = newFreeTimeStop2;
-                                Console.WriteLine($"Bokningen har uppdaterats till starttid {newFreeTimeStart} i {newFreeTimeStop2} timmar.");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Ogiltigt datum eller tidformat. Vänligen försök igen.");
-                            }
-                            break;
+                                if (DateTime.TryParse(newStartTime, out DateTime newFreeTimeStart) && TimeSpan.TryParse(newTempAmount2, out TimeSpan newFreeTimeStop2))
+                                {
+                                    bookedRum.FreeTimeStart = newFreeTimeStart;
+                                    bookedRum.FreeTimeStop = newFreeTimeStop2;
+                                    Console.WriteLine($"Bokningen har uppdaterats till starttid {newFreeTimeStart} i {newFreeTimeStop2} timmar.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Ogiltigt datum eller tidformat. Vänligen försök igen.");
+                                }
+                                break;
 
-                        default:
-                            Console.WriteLine("Ogiltigt val. Vänligen välj ett korrekt alternativ.");
-                            break;
+                            default:
+                                Console.WriteLine("Ogiltigt val. Vänligen välj ett korrekt alternativ.");
+                                break;
+                        }
                     }
-                }
 
+                }
             }
+            else
+            {
+                Console.WriteLine("Ogiltligt Id");
+                Program.Pause();
+            }
+
         }
     }
 }
