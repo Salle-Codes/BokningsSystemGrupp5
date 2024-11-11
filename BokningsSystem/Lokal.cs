@@ -10,15 +10,16 @@ namespace BokningsSystem
 {
     internal class Lokal : IBookable
     {
-        public string RoomType { get; set; }
-        public int RoomNum { get; set; }
-        public byte Seats { get; set; }
-        public byte Outlets { get; set; }
-        public bool Ac { get; set; }
-        public DateTime FreeTimeStart { get; set; }
-        public TimeSpan FreeTimeStop { get; set; }
-        public bool IsBooked { get; set; }
-        public int BookingId { get; set; }
+        public string RoomType { get; set; } //Rumstypen i form av string
+        public int RoomNum { get; set; } //Rumsnummret i form av int
+        public byte Seats { get; set; } //Antal säten 
+        public byte Outlets { get; set; } //Antal eluttag
+        public bool Ac { get; set; } //Om rummet har Ac
+        public DateTime FreeTimeStart { get; set; } //Används vid bokning och är starttiden
+        public TimeSpan FreeTimeStop { get; set; } //Används vid bokning och är tidsspannet
+        public bool IsBooked { get; set; } //Bool för om rummet är bokat eller inte
+        public int BookingId { get; set; } //BokningsId
+        //Sparar properties vid skapning
         public Lokal(string roomType, byte seats, byte outlets, bool ac, int roomNum)
         {
             RoomType = roomType;

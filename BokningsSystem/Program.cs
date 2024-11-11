@@ -8,7 +8,9 @@ namespace BokningsSystem
 {
     internal class Program
     {
+        //Listan med alla rum, både bokade och icke-Bokade
         public static List <Lokal> premises = new List<Lokal>();
+        //Paus-metod så användaren hinner läsa allt
         public static void Pause()
         {
             Console.WriteLine("Tryck Enter för att gå vidare");
@@ -16,6 +18,7 @@ namespace BokningsSystem
             Console.Clear();
             choice = "";
         }
+        //Metod som kollar om det går att konvertera användarinmatning
         public static string Nullable(string text)
         {
             if (!string.IsNullOrEmpty(text))
@@ -64,15 +67,19 @@ namespace BokningsSystem
             }
             Console.WriteLine(bottomRight);
         }
+        //Metod som skriver in listan på rum i ett dokument
         public static void WriteList(List<Lokal> list)
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
+            //JsonSerialize på listan och options
             string jsonString = JsonSerializer.Serialize(list, options);
+            //Skriver in allt i dokument
             File.WriteAllText("Bokningar.Json", jsonString);
         }
         public static string? choice;
         static void Main(string[] args)
-        {            
+        {       
+            //Läser in dokument och lägger in det i listan varje gång programmet startas
             premises = JsonSerializer.Deserialize<List<Lokal>>(File.ReadAllText("Bokningar.Json"));
             while (true)
             {
@@ -108,6 +115,7 @@ namespace BokningsSystem
                     case "7":
                         Console.WriteLine("Tack för att du använde vårt bokningssystem!");
                         Pause();
+                        //Sparar allt i listan varje gång programmet stängs ned
                         WriteList(premises);
                         Environment.Exit(0);
                         break;

@@ -11,10 +11,12 @@ namespace BokningsSystem
     {
         //Int som endast finns för grupprum
         public int Windows { get; set; }
+        //Sparar properties vid skapning
         public Grupprum(string roomType, byte seats, byte outlets, bool ac, int roomNum, int windows) : base(roomType, seats, outlets, ac, roomNum)
         {
             Windows = windows;
         }
+        //Sparar properties vid skapning
         public Grupprum(string roomType, byte seats, byte outlets, bool ac, int roomNum, int windows, DateTime freeTimeStart, TimeSpan freeTimeStop, int id) : base(roomType, seats, outlets, ac, roomNum)
         {
             RoomType = roomType;

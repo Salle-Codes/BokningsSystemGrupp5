@@ -12,10 +12,12 @@ namespace BokningsSystem
     {
         //Bool som endast finns för salar
         public bool Projector { get; set; }
+        //Sparar properties vid skapning
         public Sal(string roomType, byte seats, byte outlets, bool ac, int roomNum, bool projector) : base(roomType, seats, outlets, ac, roomNum)
         {
             Projector = projector;
         }
+        //Sparar properties vid skapning
         public Sal(string roomType, byte seats, byte outlets, bool ac, int roomNum, bool projector, DateTime freeTimeStart, TimeSpan freeTimeStop, int bookingId)
         {
             RoomType = roomType;
