@@ -76,8 +76,6 @@ namespace BokningsSystem
             premises = JsonSerializer.Deserialize<List<Lokal>>(File.ReadAllText("Bokningar.Json"));
             while (true)
             {
-                Console.WriteLine("Välkommen till Plushögskolans bokninssystem för salar och grupprum!");
-                Console.WriteLine("1: Visa bokningar \n2: Boka sal/grupprum\n3: Redigera bokning \n4: Avboka \n5: Lägg till sal/grupprum \n6: Ta bort sal/grupprum\n7: Avsluta");
                 PrintMenu(new string[] { "Visa bokningar", "Boka sal/grupprum", "Redigera bokning", "Avboka", "Lägg till sal/grupprum", "Ta bort sal/grupprum" });
                 choice = Nullable(Console.ReadLine());
 

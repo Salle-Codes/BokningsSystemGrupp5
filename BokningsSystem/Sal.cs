@@ -52,8 +52,6 @@ namespace BokningsSystem
                 Console.WriteLine("Något gick fel, vänligen försök igen");
                 Program.Pause();
             }
-
-
         }
         public static int IdCheck(Lokal room)
         {
