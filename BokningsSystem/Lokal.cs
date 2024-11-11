@@ -132,37 +132,65 @@ namespace BokningsSystem
             Console.WriteLine("Vad vill du skapa?");
             Console.WriteLine("1: Grupprum");
             Console.WriteLine("2: Sal");
-            string? roomTypeChoice = Console.ReadLine();
-            if (roomTypeChoice == "1" || roomTypeChoice == "2")
+            //Tar in alla inputs med felhantering i åtanke
+            if (int.TryParse(Console.ReadLine(), out int val))
             {
                 Console.WriteLine("Ange rumnummer:");
-                int roomNum = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Ange antal sittplatser:");
-                byte seats = Convert.ToByte(Console.ReadLine());
-                Console.WriteLine("Ange antal eluttag:");
-                byte outlets = Convert.ToByte(Console.ReadLine());
-                Console.WriteLine("Finns det AC? (ja/nej):");
-                bool ac = Console.ReadLine()?.ToLower() == "ja";
-                // Skapa ett nytt rum baserat på användarens val
-                if (roomTypeChoice == "1")
+                if (int.TryParse(Console.ReadLine(), out int roomNum))
                 {
-                    Console.WriteLine("Ange antal fönster:");
-                    int windows = Convert.ToInt32(Console.ReadLine());
-                    // Skapa ett nytt grupprum
-                    var newRoom = new Grupprum("Grupprum", seats, outlets, ac, roomNum, windows);
-                    Program.premises.Add(newRoom);
-                    Console.WriteLine($"Grupprum {roomNum} har lagts till.");
+                    Console.WriteLine("Ange antal sittplatser:");
+                    if (byte.TryParse(Console.ReadLine(), out byte seats))
+                    {
+                        Console.WriteLine("Ange antal eluttag:");
+                        if (byte.TryParse(Console.ReadLine(), out byte outlets))
+                        {
+                            Console.WriteLine("Finns det AC? (ja/nej):");
+                            if (bool.TryParse(Console.ReadLine().ToLower(), out bool ac))
+                            {
+                                // Skapa ett nytt rum baserat på användarens val
+                                switch (val)
+                                {
+                                    case 1:
+                                        Console.WriteLine("Ange antal fönster:");
+                                        int windows = Convert.ToInt32(Console.ReadLine());
+                                        // Skapa ett nytt grupprum
+                                        var newGrupprum = new Grupprum("Grupprum", seats, outlets, ac, roomNum, windows);
+                                        Program.premises.Add(newGrupprum);
+                                        Console.WriteLine($"Grupprum {roomNum} har lagts till.");
+                                        break;
+                                    case 2:
+                                        Console.WriteLine("Finns det projektor? (ja/nej):");
+                                        bool projector = Console.ReadLine()?.ToLower() == "ja";
+                                        // Skapa en ny sal
+                                        var newSal = new Sal("Sal", seats, outlets, ac, roomNum, projector);
+                                        Program.premises.Add(newSal);
+                                        Console.WriteLine($"Sal {roomNum} har lagts till.");
+                                        break;
+                                    default:
+                                        Console.WriteLine("Ogiltigt val, försök igen");
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Ogiltigt val. Försök igen.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ogiltigt val. Försök igen.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ogiltigt val. Försök igen.");
+                    }
                 }
-                else if (roomTypeChoice == "2")
+                else
                 {
-                    Console.WriteLine("Finns det projektor? (ja/nej):");
-                    bool projector = Console.ReadLine()?.ToLower() == "ja";
-                    // Skapa en ny sal
-                    var newRoom = new Sal("Sal", seats, outlets, ac, roomNum, projector);
-                    Program.premises.Add(newRoom);
-                    Console.WriteLine($"Sal {roomNum} har lagts till.");
+                    Console.WriteLine("Ogiltigt val. Försök igen.");
                 }
-            }
+            }                
             else
             {
                 Console.WriteLine("Ogiltigt val. Försök igen.");
