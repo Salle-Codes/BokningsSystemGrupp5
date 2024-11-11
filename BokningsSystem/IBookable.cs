@@ -9,7 +9,7 @@ namespace BokningsSystem
     internal interface IBookable
     {
         //Bokningsmetod
-        public static virtual void Booking(Lokal lokal)
+        public virtual void Booking()
         {
 
         }

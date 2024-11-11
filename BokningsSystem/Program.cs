@@ -96,7 +96,24 @@ namespace BokningsSystem
                         Lokal.Booking();
                         break;
                     case "3":
-                        Lokal.ChangeBooking();
+                        Console.WriteLine("Ange ditt ID för att ändra boknigen");
+                        if (int.TryParse(Console.ReadLine(), out int bookingId))
+                        {
+                            int index = premises.FindIndex(x => x.BookingId == bookingId && x.IsBooked);
+                            if (index != -1)
+                            {
+                                premises[index].ChangeBooking();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Angedda ID hittades ej");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ogiltigt Id");
+                            Program.Pause();
+                        }
                         break;
                     case "4":
                         Lokal.CancelBooking(premises);

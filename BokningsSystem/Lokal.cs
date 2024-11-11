@@ -232,7 +232,6 @@ namespace BokningsSystem
             }
             Program.Pause();
         }
-
         public static void Booking()
         {
             //Frågar användaren om de vill boka grupprum eller sal
@@ -261,6 +260,7 @@ namespace BokningsSystem
                             {
                                 //skickar in det klonade rummet till bokningsmetoden
                                 Sal.BokningSal(index);
+                                index.Test();
                             }
                             else
                             {
@@ -335,15 +335,9 @@ namespace BokningsSystem
             }
 
         }
-        public static void ChangeBooking()
+        public void ChangeBooking()
         {
-            Console.WriteLine("Ange ditt ID för att ändra boknigen");
-            if (int.TryParse(Console.ReadLine(), out int bookingId))
-            {
-                Lokal bookedRum = Program.premises.FirstOrDefault(x => x.BookingId == bookingId && x.IsBooked);
-                if (bookedRum != null)
-                {
-                    Console.WriteLine("Vill du : \n 1. Ändra tid \n 2. Ändra datum");
+                    Console.WriteLine("Vill du : \n1. Ändra tid \n2. Ändra datum");
                     if (int.TryParse(Console.ReadLine(), out int changingChoise))
                     {
                         switch (changingChoise)
@@ -356,7 +350,7 @@ namespace BokningsSystem
 
                                 if (TimeSpan.TryParse(newTempAmount, out TimeSpan newFreeTimeStop))
                                 {
-                                    bookedRum.FreeTimeStop = newFreeTimeStop;
+                                    this.FreeTimeStop = newFreeTimeStop;
                                     Console.WriteLine($"Bokningen har uppdaterats. Din bokning har {newFreeTimeStop} Timmar nu.");
                                 }
                                 else
@@ -373,8 +367,8 @@ namespace BokningsSystem
 
                                 if (DateTime.TryParse(newStartTime, out DateTime newFreeTimeStart) && TimeSpan.TryParse(newTempAmount2, out TimeSpan newFreeTimeStop2))
                                 {
-                                    bookedRum.FreeTimeStart = newFreeTimeStart;
-                                    bookedRum.FreeTimeStop = newFreeTimeStop2;
+                                    this.FreeTimeStart = newFreeTimeStart;
+                                    this.FreeTimeStop = newFreeTimeStop2;
                                     Console.WriteLine($"Bokningen har uppdaterats till starttid {newFreeTimeStart} i {newFreeTimeStop2} timmar.");
                                 }
                                 else
@@ -387,16 +381,7 @@ namespace BokningsSystem
                                 Console.WriteLine("Ogiltigt val. Vänligen välj ett korrekt alternativ.");
                                 break;
                         }
-                    }
-
-                }
-            }
-            else
-            {
-                Console.WriteLine("Ogiltligt Id");
-                Program.Pause();
-            }
-
+                }           
         }
     }
 }
