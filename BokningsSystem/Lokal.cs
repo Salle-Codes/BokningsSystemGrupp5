@@ -194,13 +194,16 @@ namespace BokningsSystem
 
         public static void Booking()
         {
+            //Frågar användaren om de vill boka grupprum eller sal
             Console.WriteLine("Vad vill du boka:\n1: Sal\n2: Grupprum");
+            //If-sats för felhantering av inmatning
             if (int.TryParse(Console.ReadLine(), out int booking))
             {
                 switch (booking)
                 {
                     case 1:
                         Console.WriteLine("Vilken sal vill du boka? \nAnge rumnummret:");
+                        //Skriver ut alla salar som inte är bokade
                         foreach (Lokal Type in Program.premises)
                         {
                             if (Type.RoomType == "Sal" && !Type.IsBooked)
@@ -208,12 +211,14 @@ namespace BokningsSystem
                                 Console.WriteLine($"{Type.RoomType} {Type.RoomNum}");
                             }
                         }
+                        //Tar in inmatning och försöker konvertera
                         if (int.TryParse(Console.ReadLine(), out int choice))
                         {
+                            //Söker efter angedda rum och klonar denna
                             Lokal index = (Lokal)Program.premises.FirstOrDefault(x => x.RoomNum == choice).MemberwiseClone();
                             if (index != null)
                             {
-
+                                //skickar in det klonade rummet till bokningsmetoden
                                 Sal.BokningSal(index);
                             }
                             else
@@ -225,6 +230,7 @@ namespace BokningsSystem
                         break;
                     case 2:
                         Console.WriteLine("Vilket grupprum vill du boka? \nAnge rumnummret:");
+                        //Skriver ut alla grupprum som inte är bokade
                         foreach (Lokal Type in Program.premises)
                         {
                             if (Type.RoomType == "Grupprum" && !Type.IsBooked)
@@ -232,12 +238,15 @@ namespace BokningsSystem
                                 Console.WriteLine($"{Type.RoomType} {Type.RoomNum}");
                             }
                         }
+                        //Tar in inmatning och försöker konvertera
                         if (int.TryParse(Console.ReadLine(), out choice))
                         {
+                            //Söker efter angedda rum och klonar denna
                             Lokal index = (Lokal)Program.premises.FirstOrDefault(x => x.RoomNum == choice).MemberwiseClone();
                             if (index != null)
                             {
-                                Grupprum.BokningGrupprum(index); //Hej test2
+                                //skickar in det klonade rummet till bokningsmetoden
+                                Grupprum.BokningGrupprum(index);
                             }
                             else
                             {
@@ -253,7 +262,7 @@ namespace BokningsSystem
             }
             else
             {
-                Console.WriteLine("Något gick fel, vänligen försök igen");
+                Console.WriteLine("Ange ett korrekt val");
                 Program.Pause();
             }
         }

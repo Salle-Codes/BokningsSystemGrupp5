@@ -10,6 +10,7 @@ namespace BokningsSystem
 {
     internal class Sal: Lokal, IBookable
     {
+        //Bool som endast finns för salar
         public bool Projector { get; set; }
         public Sal(string roomType, byte seats, byte outlets, bool ac, int roomNum, bool projector) : base(roomType, seats, outlets, ac, roomNum)
         {

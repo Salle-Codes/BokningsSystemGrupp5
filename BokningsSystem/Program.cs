@@ -102,7 +102,7 @@ namespace BokningsSystem
                         Pause();
                         break;
                     case null:
-                        Console.WriteLine("Något gick fel, vänligen försök igen");
+                        Console.WriteLine("Vänligen ange ett korrekt val");
                         Pause();
                         break;
                     case "7":

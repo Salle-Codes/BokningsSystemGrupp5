@@ -9,6 +9,7 @@ namespace BokningsSystem
 {
     internal class Grupprum: Lokal
     {
+        //Int som endast finns för grupprum
         public int Windows { get; set; }
         public Grupprum(string roomType, byte seats, byte outlets, bool ac, int roomNum, int windows) : base(roomType, seats, outlets, ac, roomNum)
         {
