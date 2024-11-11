@@ -38,7 +38,7 @@ namespace BokningsSystem
         {
             Console.WriteLine("1: Lista alla lediga lokaler\n2: Lista alla bokade lokaler\n3: Lista alla lokaler från ett specifikt år");
             var choice = (Console.ReadLine());
-
+            //Läser in användarens input och presenterar menyval
             switch (choice)
             {
                 case "1":
@@ -47,6 +47,7 @@ namespace BokningsSystem
                     switch (choice2)
                     {
                         case "1":
+                            //Listar upp alla lokaler som inte är bokade med alla lokalens egenskaper
                             foreach (Lokal room in premises)
                             {
                                 if (room.IsBooked != true)
@@ -56,6 +57,7 @@ namespace BokningsSystem
                             }
                             break;
                         case "2":
+                            //Listar upp alla lokaler som inte är bokade fast utan egenskaper
                             foreach (Lokal room in premises)
                             {
                                 if (room.IsBooked != true)
@@ -75,6 +77,7 @@ namespace BokningsSystem
                     switch (choice3)
                     {
                         case "1":
+                            //Listar upp alla bokade lokaler med deras egenskaper och info om bokningar
                             foreach (Lokal room in premises)
                             {
                                 if (room.IsBooked == true)
@@ -84,6 +87,7 @@ namespace BokningsSystem
                             }
                             break;
                         case "2":
+                            //Listar upp alla bokade lokaler utan egenskaper men med info om bokningar
                             foreach (Lokal room in premises)
                             {
                                 if (room.IsBooked == true)
@@ -100,11 +104,14 @@ namespace BokningsSystem
                 case "3":
                     Console.WriteLine("Ange vilket år du vill lista alla bokningar ifrån:");
                     var yearChoice = Console.ReadLine();
+                    //Läser in användarens input om vilket år de vill lista bokningar ifrån
                     if (int.TryParse(yearChoice, out int year))
                     {
+                        //Letar reda på bokningar som som startar på året som matchar användarens input
                         var lokalAmountYear = premises.Where(room => room.FreeTimeStart.Year == year).ToList();
                         if (lokalAmountYear.Count > 0)
                         {
+                            //Skriver ut alla lokaler och deras aktiva bokningar under det året
                             foreach (Lokal room in lokalAmountYear)
                             {
                                 Console.WriteLine($"{room.RoomType} {room.RoomNum} \nBokningar:\n{room.FreeTimeStart} - {room.FreeTimeStart.Add(room.FreeTimeStop)}");
