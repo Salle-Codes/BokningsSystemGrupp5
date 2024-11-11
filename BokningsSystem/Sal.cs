@@ -8,7 +8,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BokningsSystem
 {
-    internal class Sal: Lokal, IBookable
+    internal class Sal: Lokal
     {
         //Bool som endast finns för salar
         public bool Projector { get; set; }
