@@ -405,6 +405,10 @@ namespace BokningsSystem
             }
 
         }
+        public virtual void DisplayRoomInfo(List<Lokal> premises)
+        {
+            Console.WriteLine($"Rumstyp: {RoomType}, Rumnummer: {RoomNum}, Sittplatser: {Seats}, Eluttag: {Outlets}, AC: {Ac}");
+        }
     }
 }
 
