@@ -35,7 +35,7 @@ namespace BokningsSystem
 
         public static void List(List<Lokal> premises)
         {
-            Console.WriteLine("1: Lista alla lediga lokaler\n2: Lista alla bokade lokaler\n");
+            Console.WriteLine("1: Lista alla lediga lokaler\n2: Lista alla bokade lokaler\n3: Lista alla lokaler från ett specifikt år");
             var choice = (Console.ReadLine());
 
             switch (choice)
@@ -96,11 +96,33 @@ namespace BokningsSystem
                             break;
                     }
                     break;
+                case "3":
+                    Console.WriteLine("Ange vilket år du vill lista alla bokningar ifrån:");
+                    var yearChoice = Console.ReadLine();
+                    if (int.TryParse(yearChoice, out int year))
+                    {
+                        var lokalAmountYear = premises.Where(room => room.FreeTimeStart.Year == year).ToList();
+                        if (lokalAmountYear.Count > 0)
+                        {
+                            foreach (Lokal room in lokalAmountYear)
+                            {
+                                Console.WriteLine($"{room.RoomType} {room.RoomNum} \nBokningar:\n{room.FreeTimeStart} - {room.FreeTimeStart.Add(room.FreeTimeStop)}");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Inga bokningar hittade för {year}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ogiltligt år");
+                    }
+                    break;
                 default:
                     Console.WriteLine("Ogiltig input");
                     break;
             }
-            //Listar upp alla salar/grupprum med * om den är upptagen samt egenskaper på rummen
         }
 
         public static void New()
