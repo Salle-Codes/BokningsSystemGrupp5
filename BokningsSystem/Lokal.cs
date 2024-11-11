@@ -172,24 +172,36 @@ namespace BokningsSystem
         {
             //Ta bort lokal
             Console.WriteLine("Vilken lokal vill du ta bort? Ange nummer:");
+            Console.WriteLine("Glöm inte att ta bort alla aktiva bokningar på den lokalen");
             foreach (Lokal room in premises)
             {
-                Console.WriteLine($"{room.RoomType} {room.RoomNum}");
+                if (room.IsBooked != true)
+                {
+                    Console.WriteLine($"{room.RoomType} {room.RoomNum}");
+                }
             }
-            int lokalen = Convert.ToInt32(Console.ReadLine());
-            //Leta efter matchande lokal i listan och tilldela den till en ny variabel
-            var lokalDelete = premises.FirstOrDefault(lok => lok.RoomNum.Equals(lokalen));
-
-            if (lokalDelete != null)
+            if (int.TryParse(Console.ReadLine(), out int lokalen))
             {
-                // Ta bort lokalen från listan
-                premises.Remove(lokalDelete);
-                Console.WriteLine($"Lokal '{lokalen}' har tagits bort.");
+                //Leta efter matchande lokal i listan och tilldela den till en ny variabel
+                var lokalDelete = premises.FirstOrDefault(lok => lok.RoomNum.Equals(lokalen) && lok.IsBooked == false);
+                var tempCheck = premises.FirstOrDefault(lok => lok.IsBooked.Equals(true) && lok.RoomNum == lokalDelete.RoomNum);
+
+                if (lokalDelete != null && tempCheck == null)
+                {
+                    // Ta bort lokalen från listan
+                    premises.Remove(lokalDelete);
+                    Console.WriteLine($"Lokalen {lokalen} har tagits bort.");
+                }
+                else
+                {
+                    Console.WriteLine($"Lokalen {lokalen} hittades inte eller så finns det kvar bokningar på den");
+                }
             }
             else
             {
-                Console.WriteLine($"Lokalen {lokalen} hittades inte.");
+               Console.WriteLine("Ogiltig inmatning");
             }
+            Program.Pause();
         }
 
         public static void Booking()
