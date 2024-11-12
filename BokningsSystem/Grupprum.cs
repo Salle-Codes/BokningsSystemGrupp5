@@ -96,5 +96,10 @@ namespace BokningsSystem
                 return Id;
             }
         }
+        public override void DisplayRoomInfo(List<Lokal> premises)
+        {
+            base.DisplayRoomInfo(premises);
+            Console.WriteLine($"Fönster {Windows}");
+        }
     }
 }

@@ -58,7 +58,7 @@ namespace BokningsSystem
             {
                 Console.WriteLine(vertical + $"{i + 1}: {menuItems[i]}".PadRight(30) + vertical);
             }
-            Console.WriteLine(vertical + $"7: Avsluta".PadRight(30) + vertical);
+            Console.WriteLine(vertical + $"8: Avsluta".PadRight(30) + vertical);
 
             Console.Write(bottomLeft);
             for (int i = 0; i < 30; i++)
@@ -89,7 +89,7 @@ namespace BokningsSystem
             premises.Add(new Grupprum("Grupprum", 9, 4, true, 6, 3));
             while (true)
             {
-                PrintMenu(new string[] { "Visa bokningar", "Boka sal/grupprum", "Redigera bokning", "Avboka", "Lägg till sal/grupprum", "Ta bort sal/grupprum" });
+                PrintMenu(new string[] { "Visa bokningar", "Boka sal/grupprum", "Redigera bokning", "Avboka", "Lägg till sal/grupprum", "Ta bort sal/grupprum", "Visa info om Lokal" });
                 choice = Nullable(Console.ReadLine());
 
                 switch (choice)
@@ -136,6 +136,10 @@ namespace BokningsSystem
                         Pause();
                         break;
                     case "7":
+                        premises[0].DisplayRoomInfo(premises);
+                        Pause();
+                        break;
+                    case "8":
                         Console.WriteLine("Tack för att du använde vårt bokningssystem!");
                         Pause();
                         //Sparar allt i listan varje gång programmet stängs ned
