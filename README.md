@@ -18,18 +18,9 @@ Programmet begränsas just nu av att om en sal eller grupprum tas bort som har k
 så ligger bokningarna kvar efter att salen/gruppgrummet har tagits bort. Detta har åtgärdats genom
 en varning i metoden för att ta bort sal/grupprum.
 
-
-
-
-Victor och Hampus:
-Properties i Lokal-klassen
-Eventuella konstruktorer
-Så många metoder vi kan komma på i alla klasser
-Börja jobba på några metoder
-Börja med variabler i main-programmet
-Börja med interfacet
-Göra menyn i main
-Lägga till inloggning med ID
+Programmet är uppbyggt med hänsyn till goda objektorienterings-principer för robust och
+strukturerad kod med relevanta klasser, metoder och objekt.
+För att göra koden kortare och mer läsbar har vi använt oss av LINQ vid manipuleringen av listor.
 
 Huvudansvar:
 Hampus:
