@@ -60,7 +60,7 @@ namespace BokningsSystem
                     }
                     else
                     {
-                        Console.WriteLine("Något gick fel, vänligen försök igen abow");
+                        Console.WriteLine("Något gick fel, vänligen försök igen");
                         Program.Pause();
                     }
                 }

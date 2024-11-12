@@ -78,7 +78,7 @@ namespace BokningsSystem
         }
         public static string? choice;
         static void Main(string[] args)
-        {       
+        {
             //Läser in dokument och lägger in det i listan varje gång programmet startas
             premises = JsonSerializer.Deserialize<List<Lokal>>(File.ReadAllText("Bokningar.Json"));
             while (true)
