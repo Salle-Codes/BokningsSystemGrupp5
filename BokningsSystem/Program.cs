@@ -85,6 +85,7 @@ namespace BokningsSystem
             {
                 PrintMenu(new string[] { "Visa bokningar", "Boka sal/grupprum", "Redigera bokning", "Avboka", "Lägg till sal/grupprum", "Ta bort sal/grupprum", "Visa info om Lokal" });
                 choice = Nullable(Console.ReadLine());
+                Lokal lokal = new Lokal();
 
                 switch (choice)
                 {
@@ -130,7 +131,11 @@ namespace BokningsSystem
                         Pause();
                         break;
                     case "7":
-                        premises[0].DisplayRoomInfo(premises);
+                       lokal.DisplayRoomInfo();
+                        foreach (Lokal s in premises.DistinctBy(x=>x.RoomNum).ToList())
+                        {
+                            s.DisplayRoomInfo();
+                        }
                         Pause();
                         break;
                     case "8":

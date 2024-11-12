@@ -96,9 +96,9 @@ namespace BokningsSystem
                 return Id;
             }
         }
-        public override void DisplayRoomInfo(List<Lokal> premises)
+        public override void DisplayRoomInfo()
         {
-            base.DisplayRoomInfo(premises);
+            base.DisplayRoomInfo();
             Console.WriteLine($"Projektor: {Projector}");
         }
     }
