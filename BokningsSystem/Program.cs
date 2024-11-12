@@ -80,13 +80,7 @@ namespace BokningsSystem
         static void Main(string[] args)
         {
             //Läser in dokument och lägger in det i listan varje gång programmet startas
-            //premises = JsonSerializer.Deserialize<List<Lokal>>(File.ReadAllText("Bokningar.Json"));
-            premises.Add(new Sal("Sal", 24, 12, true, 1, false));
-            premises.Add(new Sal("Sal", 24, 10, false, 2, true));
-            premises.Add(new Sal("Sal", 22, 14, true, 3, true));
-            premises.Add(new Grupprum("Grupprum", 6, 4, true, 4, 3));
-            premises.Add(new Grupprum("Grupprum", 8, 4, false, 5, 3));
-            premises.Add(new Grupprum("Grupprum", 9, 4, true, 6, 3));
+            premises = JsonSerializer.Deserialize<List<Lokal>>(File.ReadAllText("Bokningar.Json"));
             while (true)
             {
                 PrintMenu(new string[] { "Visa bokningar", "Boka sal/grupprum", "Redigera bokning", "Avboka", "Lägg till sal/grupprum", "Ta bort sal/grupprum", "Visa info om Lokal" });
