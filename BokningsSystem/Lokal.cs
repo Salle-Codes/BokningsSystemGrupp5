@@ -267,7 +267,6 @@ namespace BokningsSystem
                             {
                                 //skickar in det klonade rummet till bokningsmetoden
                                 Sal.BokningSal(index);
-                                index.Test();
                             }
                             else
                             {
